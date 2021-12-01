@@ -57,6 +57,7 @@ html * {
 
 .avatar {
 	border-radius: 50%;
+	padding-left: 5px;
 }
 
 h1 {
