@@ -45,6 +45,8 @@ html * {
 
 .social a {
 	display: inline;
+	color: #000000;
+	font-weight: bold;
 }
 
 .main {
