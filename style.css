@@ -30,18 +30,23 @@ h3 {
 	padding: 0px 5px 10px 5px;
 }
 
+.centerdiv {
+	margin: auto;
+}
+
 /* side navigation panel */
 .sidenav {
 	max-width: 250px;
 	position: fixed;
 	z-index: 1;
-	top: 10px;
-	left: 10px;
+	top: 100px;
+	left: 50%;
+	transform: translateX(-600px);
 	padding: 10px;
 	text-align: left;
-	overflow-x: hidden;
+	/*overflow-x: hidden;*/
 	border-style: solid;
-	border-width: 0px;
+	border-width: 1px;
 	border-radius: 10px;
 	border-color: #000000;
 }
@@ -131,6 +136,8 @@ h3 {
 		position: static;
 		overflow-x: visible;
 		max-width: 650px;
+		border-width: 0px;
+		transform: translateX(0px);
 	}
 	.sidenav a {
 		display: inline;
