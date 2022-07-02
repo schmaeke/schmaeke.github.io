@@ -8,7 +8,7 @@ html * {
 	font-size: 24pt;
 
 	/* pos and size */
-	max-height: 100vh;
+	/*max-height: 100vh;*/
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0;
@@ -27,6 +27,7 @@ html * {
 
 .left {
 	float: left;
+	height: 200cm;
 	writing-mode: vertical-lr;
 	font-size: 14pt;
 	font-weight: bold;
@@ -37,5 +38,5 @@ html * {
 .right {
 	width: 100%;
 	text-align: center;
-	padding-top: 50vh;
+	/*padding-top: 50vh;*/
 }
