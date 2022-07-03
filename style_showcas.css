@@ -53,6 +53,11 @@ html * {
 	text-align: center;
 }
 
+.showcaseimage {
+	padding: 10px;
+	max-width: 500px;
+}
+
 .bottombar {
 	/* colors */
 	background: #0000ff;
