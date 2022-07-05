@@ -40,6 +40,11 @@ html * {
 	border-color: #000000;
 	border-width: 3px;
 	border-style: solid;
+	transition: 0.2s ease;
+}
+
+.imagelink:hover {
+	opacity: 0.6;
 }
 
 .septitle {
