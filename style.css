@@ -70,7 +70,7 @@ html * {
 
 	text-align: justify;
 
-	max-width: 1200px;
+	max-width: 1000px;
 	min-width: 500px;
 	margin-top: 10px;
 	margin-right: auto;
@@ -98,10 +98,13 @@ html * {
 	background: none;
 	color: #224466;
 
+	border-bottom: dashed 1px #224466;
+
 	font-family: 'Ibarra Real Nova', serif;
 	font-size: 16pt;
 	font-weight: bold;
 	padding-top: 10px;
+	margin-bottom: 5px;
 }
 
 .content h3 {
