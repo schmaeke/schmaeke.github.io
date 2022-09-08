@@ -2,74 +2,14 @@
 
 <html>
 	<header>
-		<title> Home | Jan Schmäke </title>
+		<title> Jan Schmäke </title>
 		<meta charset = "utf-16">
 		<link rel = "stylesheet" href = "style.css">
 		<link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Roboto:wght@100">
-		<link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap">
-		<link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova&display=swap">
-		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 	</header>
 
-	<div class = "topBar">
-		<b>Jan Schmäke</b>
-		<li class = "navigator">
-			<a href = "#">Home</a>
-			<a href = "#">Curriculum Vitae</a>
-			<a href = "#">Projects</a>
-			<a href = "#">Miscellaneous</a>
-		</li>
+	<div class = "centered">
+		Still quiet empty here...
 	</div>
 
-<div class = "contentArea">
-<div class = "content">
-<h1>1 First section</h1>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Id leo in vitae turpis massa sed elementum. Amet nisl purus in mollis nunc sed id. Lorem ipsum dolor sit amet consectetur. Nisl nisi scelerisque eu ultrices vitae. Dui sapien eget mi proin sed libero enim. Diam maecenas sed enim ut sem viverra aliquet eget sit.
-\[\int \limits_a^b f(x)\ dx \approx \frac{b - a}{2} \sum_{i = 1}^n f\left(\frac{b + a}{2} + \xi_i \frac{b - a}{2}\right)\ \omega_i\]
-Ac ut consequat semper viverra nam libero justo. Sagittis vitae et leo duis ut diam quam nulla. Quam pellentesque nec nam aliquam sem et tortor consequat id. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Tristique sollicitudin nibh sit amet commodo nulla facilisi. Commodo sed egestas egestas fringilla phasellus. Auctor elit sed vulputate mi sit amet. Senectus et netus et malesuada fames ac turpis egestas integer. Amet consectetur adipiscing elit ut aliquam purus sit. In massa tempor nec feugiat. Sapien et ligula ullamcorper malesuada proin libero nunc.
-
-<h2>1.1 Second section</h2>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Id leo in vitae turpis massa sed elementum. Amet nisl purus in mollis nunc sed id. Lorem ipsum dolor sit amet consectetur. Nisl nisi scelerisque eu ultrices vitae. Dui sapien eget mi proin sed libero enim. Diam maecenas sed enim ut sem viverra aliquet eget sit. Ac ut consequat semper viverra nam libero justo. Sagittis vitae et leo duis ut diam quam nulla. Quam pellentesque nec nam aliquam sem et tortor consequat id. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.
-<pre class = "code">
-@Override
-public iMatrix integrate(iIntegrand integrand, iTopology topology, int order)
-{
-	final Quadrature q = new Quadrature(order);
-	iMatrix ans = integrand.shape();
-	iMatrix xi;
-	for (int i = 0; i < order; i++)
-	{
-		for (int j = 0; j < order; j++)
-		{
-			xi = q.p(i, j);
-			ans = MBOs.add(
-				ans,MBOs.scale(
-					q.w(i, j) * topology.det_J(xi),
-					integrand.integrand(xi)
-				)
-			);
-		}
-	}
-	return ans;
-}
-</pre>
-Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Tristique sollicitudin nibh sit amet commodo nulla facilisi. Commodo sed egestas egestas fringilla phasellus. Auctor elit sed vulputate mi sit amet. Senectus et netus et malesuada fames ac turpis egestas integer. Amet consectetur adipiscing elit ut aliquam purus sit. In massa tempor nec feugiat. Sapien et ligula ullamcorper malesuada proin libero nunc.
-
-<h3>1.1.1 Third section</h3>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Id leo in vitae turpis massa sed elementum. Amet nisl purus in mollis nunc sed id. Lorem ipsum dolor sit amet consectetur. Nisl nisi scelerisque eu ultrices vitae. Dui sapien eget mi proin sed libero enim. Diam maecenas sed enim ut sem viverra aliquet eget sit. Ac ut consequat semper viverra nam libero justo. Sagittis vitae et leo duis ut diam quam nulla. Quam pellentesque nec nam aliquam sem et tortor consequat id. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Tristique sollicitudin nibh sit amet commodo nulla facilisi. Commodo sed egestas egestas fringilla phasellus. Auctor elit sed vulputate mi sit amet. Senectus et netus et malesuada fames ac turpis egestas integer. Amet consectetur adipiscing elit ut aliquam purus sit. In massa tempor nec feugiat. Sapien et ligula ullamcorper malesuada proin libero nunc.
-</div>
-
-<div class = "content">
-<h1>1 First section</h1>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Id leo in vitae turpis massa sed elementum. Amet nisl purus in mollis nunc sed id. Lorem ipsum dolor sit amet consectetur. Nisl nisi scelerisque eu ultrices vitae. Dui sapien eget mi proin sed libero enim. Diam maecenas sed enim ut sem viverra aliquet eget sit.
-\[\int \limits_a^b f(x)\ dx \approx \frac{b - a}{2} \sum_{i = 1}^n f\left(\frac{b + a}{2} + \xi_i \frac{b - a}{2}\right)\ \omega_i\]
-Ac ut consequat semper viverra nam libero justo. Sagittis vitae et leo duis ut diam quam nulla. Quam pellentesque nec nam aliquam sem et tortor consequat id. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Tristique sollicitudin nibh sit amet commodo nulla facilisi. Commodo sed egestas egestas fringilla phasellus. Auctor elit sed vulputate mi sit amet. Senectus et netus et malesuada fames ac turpis egestas integer. Amet consectetur adipiscing elit ut aliquam purus sit. In massa tempor nec feugiat. Sapien et ligula ullamcorper malesuada proin libero nunc.
-
-<h2>1.1 Second section</h2>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Id leo in vitae turpis massa sed elementum. Amet nisl purus in mollis nunc sed id. Lorem ipsum dolor sit amet consectetur. Nisl nisi scelerisque eu ultrices vitae. Dui sapien eget mi proin sed libero enim. Diam maecenas sed enim ut sem viverra aliquet eget sit. Ac ut consequat semper viverra nam libero justo. Sagittis vitae et leo duis ut diam quam nulla. Quam pellentesque nec nam aliquam sem et tortor consequat id. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Tristique sollicitudin nibh sit amet commodo nulla facilisi. Commodo sed egestas egestas fringilla phasellus. Auctor elit sed vulputate mi sit amet. Senectus et netus et malesuada fames ac turpis egestas integer. Amet consectetur adipiscing elit ut aliquam purus sit. In massa tempor nec feugiat. Sapien et ligula ullamcorper malesuada proin libero nunc.
-
-<h3>1.1.1 Third section</h3>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Id leo in vitae turpis massa sed elementum. Amet nisl purus in mollis nunc sed id. Lorem ipsum dolor sit amet consectetur. Nisl nisi scelerisque eu ultrices vitae. Dui sapien eget mi proin sed libero enim. Diam maecenas sed enim ut sem viverra aliquet eget sit. Ac ut consequat semper viverra nam libero justo. Sagittis vitae et leo duis ut diam quam nulla. Quam pellentesque nec nam aliquam sem et tortor consequat id. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Tristique sollicitudin nibh sit amet commodo nulla facilisi. Commodo sed egestas egestas fringilla phasellus. Auctor elit sed vulputate mi sit amet. Senectus et netus et malesuada fames ac turpis egestas integer. Amet consectetur adipiscing elit ut aliquam purus sit. In massa tempor nec feugiat. Sapien et ligula ullamcorper malesuada proin libero nunc.
-</div>
-</div>
 </html>

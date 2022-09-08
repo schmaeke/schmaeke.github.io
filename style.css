@@ -1,11 +1,11 @@
 html * {
 	/* colors */
-	background-color: #ffffff;
-	color: #000000;
+	background-color: #000000;
+	color: #ffffff;
 
 	/* font */
-	font-family: "Roboto", sans-serif;
-	font-size: 12pt;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 16pt;
 
 	/* pos and size */
 	min-height: auto;
@@ -13,126 +13,13 @@ html * {
 	/*max-height: 100vh;*/
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.centered {
+	padding-top: 50vh;
+	margin-top: -10pt;
 	margin-bottom: 0;
-}
-
-.topBar {
-	background: #aaccee;
-	color: #224466;
-
 	text-align: center;
-
-	padding: 10px;
-}
-
-.topBar b {
-	background: none;
-	color: #224466;
-
-	border-right: 1px solid #224466;
-
-	padding-right: 11px;
-}
-
-.navigator {
-	background: none;
-	display: inline;
-}
-
-.navigator a {
-	color: #224466;
-
-	background: none;
-	text-decoration: none;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-
-.navigator a:hover {
-	opacity: 0.66;
-}
-
-.contentArea {
-	background: #fafafa;
-	min-height: 100vh;
-	padding-top: 10px;
-	padding-bottom: 25px;
-	padding-right: 25px;
-	padding-left: 25px;
-}
-
-.content {
-	background: #ffffff;
-	border-color: #e0e0e0;
-	border-style: solid;
-	border-width: 1px;
-
-	text-align: justify;
-
-	max-width: 1000px;
-	min-width: 500px;
-	margin-top: 10px;
-	margin-right: auto;
-	margin-left: auto;
-	padding-right: 20px;
-	padding-left: 20px;
-	padding-top: 10px;
-	padding-bottom: 20px;
-}
-
-.content h1 {
-	background: none;
-	color: #224466;
-
-	border-bottom: solid 2px #224466;
-
-	font-family: 'Ibarra Real Nova', serif;
-	font-size: 22pt;
-	font-weight: bold;
-	padding-top: 15px;
-	margin-bottom: 10px;
-}
-
-.content h2 {
-	background: none;
-	color: #224466;
-
-	border-bottom: dashed 1px #224466;
-
-	font-family: 'Ibarra Real Nova', serif;
-	font-size: 16pt;
-	font-weight: bold;
-	padding-top: 10px;
-	margin-bottom: 5px;
-}
-
-.content h3 {
-	background: none;
-	color: #224466;
-
-	font-family: 'Ibarra Real Nova', serif;
-	font-size: 14pt;
-	padding-top: 10px;
-}
-
-.equation {
-	color: #ff0000;
-	background: #ffffff;
-}
-
-.code {
-	background: #fafafa;
-
-	font-family: "IBM Plex Mono", monospace;
-	font-size: 10pt;
-	tab-size: 2;
-	border: solid 1px #000000;
-
-	padding: 5px;
-
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-right: 2px;
-	margin-left: 2px;
 }
