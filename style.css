@@ -1,63 +1,83 @@
 html * {
-	/* Colors for light mode. */
-	--foreground: #211c1c;
-	--background: #f1f3f7;
+	/* Tango Desktop Project Colors */
+	--butter-0: #fce94f;
+	--butter-1: #edd400;
+	--butter-2: #c4a000;
 
-	--accent: #6573ff;
+	--orange-0: #fcaf3e;
+	--orange-1: #f57900;
+	--orange-2: #ce5c00;
+
+	--chocolate-0: #e9b96e;
+	--chocolate-1: #c17d11;
+	--chocolate-2: #8f5902;
+
+	--chameleon-0: #8ae234;
+	--chameleon-1: #73d216;
+	--chameleon-2: #4e9a06;
+
+	--sky-blue-0: #729fcf;
+	--sky-blue-1: #3465a4;
+	--sky-blue-2: #204a87;
+
+	--plum-0: #ad7fa8;
+	--plum-1: #75507b;
+	--plum-2: #5c3566;
+
+	--scarlet-red-0: #ef2929;
+	--scarlet-red-1: #cc0000;
+	--scarlet-red-2: #a40000;
+
+	--aluminium-0: #eeeeec;
+	--aluminium-1: #d3d7cf;
+	--aluminium-2: #babdb6;
+	--aluminium-3: #888a85;
+	--aluminium-4: #555753;
+	--aluminium-5: #2e3436;
+
+	/* Colors for light mode. */
+	--foreground: #1f1f1f;
+	--background: #f0f0f0;
+
+	--accent: var( --plum-1 );
 
 	--shadow: rgba( 0, 0, 0, 0.15 );
 
-	--top-bar-background: #ffffff;
-	--top-bar-border: #e3e5e9;
+	--top-bar-background: #f8f8f8;
+	--top-bar-border: #e0e0e0;
 
 	--content-box-background: #ffffff;
 	--content-box-border: #e3e5e9;
+	--content-text-foreground: var( --aluminium-4 );
 
-	--copyright-foreground: #808080;
+	--copyright-foreground: var( --aluminium-3 );
 
 	/* Colors for dark mode. */
-
 	background-color: var( --background );
 	color: var( --foreground );
 	font-family: "PT Sans", sans-serif;
 	font-size: 14pt;
 }
 
+
 @media (prefers-color-scheme: dark) {
 	html * {
-		--foreground: #e7edf3;
-		--background: #0e1117;
+		--foreground: #fefeff;
+		--background: #1f1f1f;
 
-		/* --accent: #e8886b; */
+		--accent: var( --plum-0 );
 
-		--shadow: rgba( 255, 255, 255, 0 );
-
-		--top-bar-background: #020409;
-		--top-bar-border: #31363c;
+		--top-bar-background: #181818;
+		--top-bar-border: #3f3f3f;
 		
 		--content-box-background: var( --top-bar-background );
 		--content-box-border: #31363c;
+		--content-text-foreground: var( --aluminium-1 );
 
-		--copyright-foreground: var( --content-box-border );
+		--copyright-foreground: var( --aluminium-3 );
 	}
 }
 
-.dark-mode {
-	--foreground: #e7edf3;
-	--background: #0e1117;
-
-	/* --accent: #e8886b; */
-
-	--shadow: rgba( 255, 255, 255, 0 );
-
-	--top-bar-background: #020409;
-	--top-bar-border: #31363c;
-	
-	--content-box-background: var( --top-bar-background );
-	--content-box-border: #31363c;
-
-	--copyright-foreground: var( --content-box-border );
-}
 
 body {
 	margin: 0 0 0 0;
@@ -83,9 +103,11 @@ body {
 	float: left;
 }
 
+
 .logo img {
 	background-color: var( --top-bar-background );
 }
+
 
 .navigator {
 	float: right;
@@ -98,9 +120,11 @@ body {
 	overflow: hidden;
 }
 
+
 .navigator li {
 	float: left;
 }
+
 
 .navigator a {
 	background-color: inherit;
@@ -115,20 +139,24 @@ body {
 	text-decoration: none;
 }
 
+
 .active {
 	background-color: var( --background );
 	border-top: var( --accent ) solid 3px;
 }
+
 
 .inactive {
 	background-color: var( --top-bar-background );
 	border-top: var( --top-bar-background ) solid 3px;
 }
 
+
 .inactive:hover {
 	background-color: var( --background );
 	border-top: var( --background ) solid 3px;
 }
+
 
 .main {
 	margin-left: auto;
@@ -140,6 +168,7 @@ body {
 	max-width: 950px;
 }
 
+
 .content-box {
 	background-color: var( --content-box-background );
 	border: var( --content-box-border ) solid 1px;
@@ -150,6 +179,7 @@ body {
 	text-align: justify;
 }
 
+
 .content-box-entry {
 	background-color: inherit;
 	border-radius: inherit;
@@ -157,7 +187,9 @@ body {
 	padding-right: 20px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	color: var( --content-text-foreground );
 }
+
 
 hr {
 	background-color: var( --content-box-border );
@@ -165,10 +197,12 @@ hr {
 	border: none;
 }
 
+
 .main h1 {
 	font-size: 15pt;
 	padding-top: 15px;
 }
+
 
 .main h2 {
 	background-color: inherit;
@@ -176,27 +210,34 @@ hr {
 	margin-bottom: 8px;
 }
 
+
 .main a {
 	background-color: inherit;
 	color: var( --accent );
 	text-decoration: none;
 }
 
+
 .content-box b {
 	background-color: inherit;
 }
 
+
 .content-box i {
 	background-color: inherit;
+	color: inherit;
 }
+
 
 .cv-date {
 	float: right;
 }
 
+
 .spacer {
 	margin-top: 6px;
 }
+
 
 .copyright {
 	text-align: center;
