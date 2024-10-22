@@ -1,13 +1,16 @@
 /* TODO: Make adjustments for screens with lower widths. */
 
 html * {
-	--foreground: rgb( 175, 200, 225 );
-	--background: hsl( 215, 100%, 12% ); /*rgb(   0,  65, 165 );*/
+	--foreground: #eeeeec;
+	--background: #2e3436;
+	--background-bright: #232829; /* #3b4245; */
+	--accent: #8ae234;
 
 	color: var( --foreground );
 	background-color: var( --background );
 
-	font-family: "PT Sans", Sans Serif;
+	font-family: "Barlow", sans-serif;
+	font-weight: 300;
 	font-size: 12pt;
 }
 
@@ -18,12 +21,16 @@ body {
 	margin-right: auto;
 }
 
+b {
+	font-weight: 500;
+}
+
 a {
 	text-decoration: none;
 }
 
 a:hover {
-	color: white;
+	color: var( --accent );
 	transition: 0.5s;
 }
 
@@ -41,41 +48,103 @@ a:hover {
 
 .contact {
 	padding: 0px;
-	display: inline;
 	list-style-type: none;
 }
 
 .contact > li {
-	display: inline;
-	padding-right: 4px;
+display: inline;
+padding-right: 4px;
 }
 
 .socialmediaicon {
-	width: 16px;
+width: 16px;
 }
 
 main { }
 
 main > h1 {
+	color: var( --accent );
+	background-color: transparent;
 	margin-top: 0px;
 	margin-bottom: 24px;
 	padding: 0px;
 	font-size: 18pt;
+	font-weight: 400;
 }
 
 main > h2 {
+	background-color: transparent;
+	margin-bottom: 6px;
 	font-size: 14pt;
+	font-weight: 400;
+}
+
+main > b {
+	background-color: transparent;
+}
+
+main > i {
+	background-color: transparent;
+}
+
+main > hr {
+	opacity: 0.5;
 }
 
 main > date {
+	background-color: transparent;
 	float: right;
 }
 
 main > copyright {
+	background-color: transparent;
 	opacity: 0.5;
 	margin-top: 24px;
 	margin-bottom: 24px;
 	display: block;
 	text-align: center;
 	font-size: 10pt;
+}
+
+@media only screen and (max-width: 870px) {
+
+	html * {
+		font-size: 14pt;
+		background-color: var( --background-bright );
+	}
+
+	body {
+		margin-top: 16px;
+		margin-bottom: 24px;
+		width: 96%;
+		padding-left: 2%;
+		padding-right: 2%;
+	}
+
+	.sidebar {
+		z-index: auto;
+		width: 100%;
+		position: static;
+		margin: 0px;
+	}
+
+	main {
+		background-color: var( --background );
+		padding: 16px;
+		border: 2px solid rgba( 238, 238, 236, 0.1 );
+		border-radius: 10px;
+	}
+
+	main > h1 {
+		font-size: 20pt;
+	}
+
+	main > h2 {
+		font-size: 16pt;
+	}
+
+	main > copyright {
+		margin-bottom: 0px;
+	}
+
 }
