@@ -109,7 +109,7 @@ main > copyright {
 @media only screen and ( ( max-width: 870px ) or ( max-device-width: 1280px ) ) {
 
 	html * {
-		font-size: 14pt;
+		font-size: 14pt !important;
 		background-color: var( --background-bright );
 	}
 
@@ -136,11 +136,11 @@ main > copyright {
 	}
 
 	main > h1 {
-		font-size: 20pt;
+		font-size: 20pt !important;
 	}
 
 	main > h2 {
-		font-size: 16pt;
+		font-size: 16pt !important;
 	}
 
 	main > copyright {
