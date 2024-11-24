@@ -51,17 +51,22 @@ footer {
 }
 
 
-footer > a {
-	padding: 2px 2px 2px 12px;
+footer > path {
 	background-color: transparent;
-	font-familiy: inherit;
-	text-decoration: none;
-	transition: all 2s ease-out;
+	padding: 2px 2px 2px 12px;
 }
 
 
-footer > a:hover {
-	text-decoration: underline;
+footer > path > a {
+	background-color: transparent;
+	font-familiy: inherit;
+	text-decoration: none;
+	transition: 0.25s;
+}
+
+
+footer > path > a:hover {
+	color: #F3D870;
 }
 
 

@@ -1,22 +1,15 @@
 document.addEventListener( "DOMContentLoaded", ( ) => {
 
   const colors = [
-		"#C5233F", "#DC2C48",
-		"#E2BB36", "#E9C946",
-		"#29A245", "#33B34E",
-		"#58AA9A", "#66B8A7",
-		"#2A8AD9", "#3C9BE1",
-		"#9D3BD6", "#A948E0",
+		"#C5233F", "#A11E35",
+		"#E2BB36", "#B3962B",
+		"#29A245", "#22863A",
+		"#58AA9A", "#478B80",
+		"#2A8AD9", "#2272B3",
+		"#9D3BD6", "#812FB4",
 	];
 
-  const hover_colors = [
-		"#DC2C48", "#E94C66",
-		"#E9C946", "#F3D870",
-		"#33B34E", "#42CC60",
-		"#66B8A7", "#80C9BC",
-		"#3C9BE1", "#5FB2F0",
-		"#A948E0", "#BB6EF1",
-	];
+  const hover_colors = new Array( colors.length );
 
 	for ( let i = colors.length - 1; i > 0; i-- )
 	{
@@ -24,6 +17,12 @@ document.addEventListener( "DOMContentLoaded", ( ) => {
     [ colors[ i ], colors[ j ] ] = [ colors[ j ], colors[ i ] ];
     [ hover_colors[ i ], hover_colors[ j ] ] = [ hover_colors[ j ], hover_colors[ i ] ];
   }
+
+	const amount = 25;
+	for ( let i = 0; i < colors.length; i++ )
+	{
+		hover_colors[ i ] = '#' + colors[ i ].replace( /^#/, '' ).replace( /../g, color => ( '0' + Math.min( 255, Math.max( 0, parseInt( color, 16 ) + amount ) ).toString( 16 ) ).substr( -2 ) );
+	}
 
   const links = document.querySelectorAll( "main > a" );
 
