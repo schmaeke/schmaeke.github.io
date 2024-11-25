@@ -1,12 +1,12 @@
 document.addEventListener( "DOMContentLoaded", ( ) => {
 
   const colors = [
-		"#C5233F", "#A11E35",
-		"#E2BB36", "#B3962B",
-		"#29A245", "#22863A",
-		"#58AA9A", "#478B80",
-		"#2A8AD9", "#2272B3",
-		"#9D3BD6", "#812FB4",
+		"#7F172B", "#A11E35",
+		"#8F7422", "#B3962B",
+		"#1A6C2E", "#22863A",
+		"#356A63", "#478B80",
+		"#1A5A91", "#2272B3",
+		"#641F8A", "#812FB4",
 	];
 
   const hover_colors = new Array( colors.length );
