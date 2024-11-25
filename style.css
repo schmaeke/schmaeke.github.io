@@ -6,7 +6,7 @@ html * {
 	color: var( --foreground );
 	background-color: var( --background );
 
-	font-family: "PT Sans", sans;
+	font-family: "Charis SIL", serif;
 	font-weight: 300;
 	font-size: 14pt;
 
@@ -25,7 +25,7 @@ main > a {
 	text-decoration: none;
 	padding: 0px 24px 0px 24px;
 	font-size: 24pt;
-	font-weight: 700;
+	font-weight: 400;
 	justify-content: flex-end;
 	transition: 0.25s;
 	color: var( --foreground );
@@ -47,13 +47,14 @@ footer {
 	height: 32px;
 	justify-content: space-between;
 	background-color: var( --background-transparent );
-	font-family: "Recursive", monospace;
+	font-family: "PT Sans", monospace;
 }
 
 
 footer > path {
 	background-color: transparent;
 	padding: 2px 2px 2px 12px;
+	font-family: inherit;
 }
 
 
@@ -62,6 +63,7 @@ footer > path > a {
 	font-familiy: inherit;
 	text-decoration: none;
 	transition: 0.25s;
+	font-family: inherit;
 }
 
 
@@ -74,4 +76,5 @@ footer > copyright {
 	padding: 2px 12px 2px 2px;
 	background-color: transparent;
 	font-familiy: inherit;
+	font-family: inherit;
 }
