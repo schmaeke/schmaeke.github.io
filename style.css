@@ -1,80 +1,161 @@
 html * {
-	--foreground: #DBDFE9;
-	--background: #14161A;
-	--background-transparent: #14161AA0;
+	--accent: #80C9BC;
 
-	color: var( --foreground );
-	background-color: var( --background );
+	--foreground: #F3F3F3;
+	--background: #141414;
 
-	font-family: "Charis SIL", serif;
-	font-weight: 300;
+	--background-light: #272727;
+
+	--border: #5C5C5C;
+	--background-footer: #1D1D1D;
+
+	color: var(--foreground);
+	background-color: var(--background);
+
+	font-family: "Chivo", serif;
+	font-weight: 400;
 	font-size: 14pt;
-
 }
 
+html {
+	min-width: 800px;
+}
 
 body {
-	margin: 0px 0px 32px 0px;
+	margin: 0px;
 }
 
-
-main > a {
+header {
+	width: 100%;
+	height: 96px;
+	margin: 0px;
+	padding: 0px;
+	border-bottom: var(--border) 1px solid;
 	display: flex;
 	align-items: center;
-	height: 100px;
+	justify-content: space-between;
+	box-sizing: border-box;
+	background-image: url('./resources/banner.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+header::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 0;
+}
+
+header * {
+	position: relative;
+	z-index: 1;
+	background-color: transparent;
+}
+
+header ul {
+	padding: 24px;
+	list-style-type: none;
+}
+
+header ul li {
+	margin: 12px;
+	display: inline;
+}
+
+header a {
 	text-decoration: none;
-	padding: 0px 24px 0px 24px;
+	transition: 0.25s ease;
+}
+
+header a:hover {
+	opacity: 0.75;
+}
+
+.selected {
+	border-bottom: var(--foreground) 2px solid;
+}
+
+.logo a {
+	display: flex;
+	align-content: center;
+}
+
+header a b {
+	display: inline-block;
+	align-self: center;
+}
+
+header a b {
+	font-family: "Charis SIL", serif;
 	font-size: 24pt;
 	font-weight: 400;
-	justify-content: flex-end;
-	transition: 0.25s;
-	color: var( --foreground );
-	text-shadow: 2px 2px 0px black;
+	background-color: transparent;
 }
 
-
-main > a:hover {
-	padding-right: 48px;
+header img {
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	border: var(--border) 1px solid;
+	margin: 0px 24px 0px 0px;
 }
 
+body * {
+	position: relative;
+	z-index: 2;
+}
+
+main * {
+	font-family: "Charis SIL", serif;
+}
+
+main {
+	margin: 0px auto 0px auto;
+	padding: 0px;
+	min-height: calc(100vh - 96px - 64px - 1px);
+}
+
+.vertical-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.horizontal-center {
+	text-align: center;
+}
+
+.content-section * {
+	background-color: transparent;
+}
+
+.content-section {
+	padding: 24px;
+}
+
+.social-media-icon i {
+	margin: 12px;
+	font-size: 20pt;
+	transition: 0.25s ease;
+}
+
+.social-media-icon i:hover {
+	opacity: 0.75;
+}
 
 footer {
+	height: 64px;
+	margin: 0px;
+	padding: 0px 24px 0px 24px;
 	display: flex;
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 32px;
-	justify-content: space-between;
-	background-color: var( --background-transparent );
-	font-family: "PT Sans", monospace;
-}
-
-
-footer > path {
-	background-color: transparent;
-	padding: 2px 2px 2px 12px;
-	font-family: inherit;
-}
-
-
-footer > path > a {
-	background-color: transparent;
-	font-familiy: inherit;
-	text-decoration: none;
-	transition: 0.25s;
-	font-family: inherit;
-}
-
-
-footer > path > a:hover {
-	color: #F3D870;
-}
-
-
-footer > copyright {
-	padding: 2px 12px 2px 2px;
-	background-color: transparent;
-	font-familiy: inherit;
-	font-family: inherit;
+	align-items: center;
+	font-size: 12pt;
+	background-color: var(--background-footer);
+	border-top: var(--border) 1px solid;
 }
