@@ -17,6 +17,14 @@
 }
 
 .logo-container {
+	margin: 0px 0px 40px 0px;
+}
+
+.logo-container img {
+	width: 128px;
+}
+
+.name-container {
 	font-size: 32pt;
 	font-weight: bold;
 }
