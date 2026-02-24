@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Example writing article on choosing time-stepping schemes for computational methods research">
+  <title>Choosing Time-Stepping Schemes in Practice | Your Name</title>
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" defer></script>
+  <link rel="stylesheet" href="https://iosevka-webfonts.github.io/iosevka/Iosevka.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="../index.html">Your Name</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="menu-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#work">Work</a></li>
+          <li><a href="./index.html" aria-current="page">Writing</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section article-main">
+    <article class="container post post-detail">
+      <p class="post-meta">February 2026 • Numerical Analysis</p>
+      <h1>Choosing Time-Stepping Schemes in Practice</h1>
+      <p class="lead">
+        An engineering-centered checklist for selecting explicit, implicit, and
+        semi-implicit integrators in simulation code.
+      </p>
+
+      <p>
+        Time integration strategy often determines whether a model is useful in
+        production workflows. In computational mechanics, the practical question
+        is rarely "what is the highest-order method?" but rather "which method
+        delivers reliable answers under real runtime constraints?"
+      </p>
+
+      <h2>1. Start with problem stiffness</h2>
+      <p>
+        For systems with rapidly separated time scales, explicit methods force
+        impractically small time steps. In those cases, implicit families are
+        usually worth the linear or nonlinear solve overhead.
+      </p>
+
+      <h2>2. Define error and stability budgets</h2>
+      <p>
+        Choose a target tolerance that reflects engineering decision risk, not
+        just mathematical elegance. Build stability checks into your pipeline so
+        regressions are caught during routine validation runs.
+      </p>
+
+      <h2>Math Example: Truncation and Stability</h2>
+      <p>
+        For a scalar initial value problem \( y' = f(t, y) \), the
+        forward Euler update is shown below.
+      </p>
+      <div class="equation" role="math" aria-label="Forward Euler update equation">
+        \[
+          y_{n+1} = y_n + \Delta t\, f(t_n, y_n)
+        \]
+      </div>
+      <p>
+        Local truncation error is \( \mathcal{O}(\Delta t^2) \), while global
+        error is \( \mathcal{O}(\Delta t) \). For stiff systems, the stability
+        limit on \( \Delta t \) can become the dominant design constraint.
+      </p>
+
+      <h2>3. Measure throughput, not single-step speed</h2>
+      <p>
+        A method with expensive steps can still win overall if it permits larger
+        stable step sizes. Benchmark full wall-clock time to converged solution,
+        and report accuracy and cost together.
+      </p>
+
+      <h2>4. Keep implementation maintainable</h2>
+      <p>
+        Prefer schemes that your team can verify, debug, and extend. A slightly
+        less optimal algorithm is often the better research choice when it makes
+        experiments reproducible and comparisons fair.
+      </p>
+
+      <h2>Code Example: Minimal Adaptive Step Loop</h2>
+      <p>
+        This minimal pattern keeps a method practical in day-to-day research
+        experiments while enforcing a basic error budget.
+      </p>
+      <pre><code class="language-julia">function integrate_adaptive(stepper, y0, t0, t_end, dt, tol)
+  t = t0
+  y = y0
+  out = [(t, y)]
+
+  while t &lt; t_end
+    dt = min(dt, t_end - t)
+    y_next, err = stepper(t, y, dt)
+
+    if err &lt;= tol
+      t = t + dt
+      y = y_next
+      push!(out, (t, y))
+      dt *= 1.25
+    else
+      dt *= 0.5
+    end
+  end
+
+  return out
+end</code></pre>
+
+      <hr>
+      <p>
+        This example article is a starter template for the Writing section. You
+        can duplicate it for blog-style notes or lecture-style writeups.
+      </p>
+    </article>
+
+    <aside class="container section">
+      <p><a href="../index.html#writing">&larr; Back to Writing</a></p>
+    </aside>
+  </main>
+
+  <footer id="contact" class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Your Name</p>
+      <ul class="social-links">
+        <li><a href="#" aria-label="GitHub profile">GitHub</a></li>
+        <li><a href="#" aria-label="Mastodon profile">Mastodon</a></li>
+        <li><a href="mailto:you@example.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-julia.min.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.Prism && Prism.languages && Prism.languages.julia) {
+        Prism.languages.insertBefore("julia", "keyword", {
+          "function-handle": {
+            pattern: /\b[a-zA-Z_]\w*!?(?=\s*\()/,
+            alias: "function"
+          }
+        });
+        Prism.highlightAll();
+      }
+    });
+  </script>
+  <script src="../menu.js" defer></script>
+</body>
+</html>

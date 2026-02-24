@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Writing archive: articles, notes, and lecture-style material">
+  <title>Writing | Your Name</title>
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <link rel="stylesheet" href="https://iosevka-webfonts.github.io/iosevka/Iosevka.css">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="../index.html">Your Name</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="menu-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#work">Work</a></li>
+          <li><a href="./index.html" aria-current="page">Writing</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Writing Archive</p>
+        <h1>Articles, notes, and lecture-style writeups.</h1>
+        <p class="lead">
+          A single index for technical posts and longer-form explanations on
+          computational methods, numerical analysis, and research workflows.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="posts">
+          <article class="post">
+            <p class="post-meta">February 2026 • Numerical Analysis</p>
+            <h2><a href="choosing-time-stepping-schemes.html">Choosing Time-Stepping Schemes in Practice</a></h2>
+            <p>
+              Tradeoffs between explicit and implicit integration for stiff and
+              multi-scale systems, including math and Julia examples.
+            </p>
+          </article>
+
+          <article class="post">
+            <p class="post-meta">January 2026 • Research Computing</p>
+            <h2>Reproducible Simulation Pipelines</h2>
+            <p>
+              Draft in progress. This entry will cover experiment structure,
+              traceability, and validation-friendly repository patterns.
+            </p>
+          </article>
+
+          <article class="post">
+            <p class="post-meta">December 2025 • Computational Mechanics</p>
+            <h2>Verification Before Optimization</h2>
+            <p>
+              Draft in progress. Planned note on verification baselines before
+              aggressive performance tuning in simulation code.
+            </p>
+          </article>
+        </div>
+
+        <p><a href="../index.html#writing">&larr; Back to Home Writing Section</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Your Name</p>
+      <ul class="social-links">
+        <li><a href="#" aria-label="GitHub profile">GitHub</a></li>
+        <li><a href="#" aria-label="Mastodon profile">Mastodon</a></li>
+        <li><a href="mailto:you@example.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../menu.js" defer></script>
+</body>
+</html>
