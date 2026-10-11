@@ -9,10 +9,16 @@
 # Gauss where full, NNMF where cut) as squares whose area is proportional to
 # their weight.
 #
-#     julia --project=tools/figure -e 'using Pkg; Pkg.instantiate()'
+#     julia --project=tools/figure -e 'using Pkg; Pkg.instantiate()'   # once
 #     julia --project=tools/figure tools/figure/figure.jl
 #
-# The SVG replaces everything between the figure markers in index.html.
+# The script writes figure.svg next to index.html, which shows it through an
+# <img>. Where to change what:
+#
+#   shape of the hole ........ Geometry (radius, lobes, rotation)
+#   mesh sizes, order, band ... Discretisation
+#   colors, line widths ....... Colors (light and dark)
+#   point size ................ the `squares` block near the end
 
 using Unfitted
 
@@ -66,7 +72,9 @@ base_void = [(i, j) for i in 1:NBASE, j in 1:NBASE if !live(cellbox(i, j, 1 / NB
 fine_live = [(i, j) for i in 1:NFINE, j in 1:NFINE
              if near_boundary(cellbox(i, j, H), nothing) && live(cellbox(i, j, H))]
 
-# ── SVG ───────────────────────────────────────────────────────────────────────
+# ── SVG geometry ──────────────────────────────────────────────────────────────
+#
+# The unit square maps to a 320 × 320 viewBox with y pointing down.
 
 const S = 320.0                                  # viewBox edge
 const UNIT = S / NFINE                           # one fine cell in viewBox units
@@ -116,32 +124,63 @@ boundary = "M" * join((let r = radius_at(θ)
                            num(S * (CENTER[1] + r * cos(θ))) * " " * num(S * (1 - CENTER[2] - r * sin(θ)))
                        end for θ in range(0, 2π; length=361)[1:end-1]), "L") * "Z"
 
+# Quadrature points as squares whose area is proportional to the weight. The
+# largest weight gets a 3-unit square; tiny weights are clamped to stay visible.
 wmax = maximum(last, points)
 squares = join(begin
                    s = max(0.8, 3.0 * sqrt(w / wmax))
                    "M$(num(S * x - s / 2)) $(num(S * (1 - y) - s / 2))h$(num(s))v$(num(s))h-$(num(s))z"
                end for (x, y, w) in points)
 
-svg = """
-        <svg viewBox="0 0 320 320" role="img" aria-labelledby="fig-title">
-          <title id="fig-title">Computed with Unfitted.jl: a Cartesian base mesh cut by a five-lobed hole, one finer overlay active only along the boundary, and the quadrature points where the two couple: tensor Gauss in full cells, non-negative moment-fitted in cut cells.</title>
-          <path class="fill" fill-rule="evenodd" d="M0 0H320V320H0Z$boundary"/>
-          <path class="void" d="$(edge_path(void_edges; skip_frame=true))"/>
-          <path class="fine" d="$(edge_path(fine_edges))"/>
-          <path class="mesh" d="$(edge_path(base_edges))"/>
-          <path class="boundary" d="$boundary"/>
-          <path class="points" d="$squares"/>
-          <rect class="frame" width="320" height="320"/>
-        </svg>
+# ── Colors ────────────────────────────────────────────────────────────────────
+#
+# An <img> is out of reach of the page's stylesheet, so the SVG carries its own
+# colors: the Oritone tokens from style.css, light first, then the dark-mode
+# overrides. Strokes do not scale with the image, so widths are in CSS pixels.
+
+const STYLE = """
+    * { fill: none; vector-effect: non-scaling-stroke; }
+    .fill { fill: rgb(0 105 156 / 0.07); }                        /* the plate Ω */
+    .void { stroke: #525a5e; stroke-width: 1; stroke-dasharray: 2 3; }  /* dropped base cells */
+    .fine { stroke: #828a8e; stroke-width: 1; }                   /* overlay cells */
+    .mesh { stroke: #525a5e; stroke-width: 1.5; }                 /* base cells */
+    .boundary { stroke: #00699c; stroke-width: 1.25; }            /* ∂Ω */
+    .points { fill: #272c30; }                                    /* quadrature points */
+    .frame { stroke: #272c30; stroke-width: 1.5; }                /* outer frame */
+    @media (prefers-color-scheme: dark) {
+      .fill { fill: rgb(86 166 207 / 0.08); }
+      .void, .mesh { stroke: #989d9c; }
+      .fine { stroke: #737b7d; }
+      .boundary { stroke: #56a6cf; }
+      .points { fill: #e7e2d8; }
+      .frame { stroke: #e7e2d8; }
+    }
 """
 
-page = joinpath(@__DIR__, "..", "..", "index.html")
-html = read(page, String)
-head, rest = split(html, "<!-- figure:start -->\n"; limit=2)
-_, tail = split(rest, "        <!-- figure:end -->"; limit=2)
-write(page, head * "<!-- figure:start -->\n" * svg * "        <!-- figure:end -->" * tail)
+# ── Write figure.svg ──────────────────────────────────────────────────────────
+#
+# Drawing order is back to front: plate, dropped cells, overlay, base mesh, ∂Ω,
+# points, frame.
+
+svg = """
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <title>Computed with Unfitted.jl: a Cartesian base mesh cut by a five-lobed hole, one finer overlay active only along the boundary, and the quadrature points where the two couple: tensor Gauss in full cells, non-negative moment-fitted in cut cells.</title>
+  <style>
+$(rstrip(STYLE))
+  </style>
+  <path class="fill" fill-rule="evenodd" d="M0 0H320V320H0Z$boundary"/>
+  <path class="void" d="$(edge_path(void_edges; skip_frame=true))"/>
+  <path class="fine" d="$(edge_path(fine_edges))"/>
+  <path class="mesh" d="$(edge_path(base_edges))"/>
+  <path class="boundary" d="$boundary"/>
+  <path class="points" d="$squares"/>
+  <rect class="frame" width="320" height="320"/>
+</svg>
+"""
+
+write(joinpath(@__DIR__, "..", "..", "figure.svg"), lstrip(svg))
 
 println(length(base_live), " base cells, ", length(fine_live), " overlay cells, ",
         count(r -> any(p -> p.level == 2, r.parents), plan.regions), " coupling regions, ",
         length(points), " quadrature points")
-println("max moment-fit residual ", plan.moment_fit_residual_max, ", svg ", sizeof(svg), " bytes")
+println("max moment-fit residual ", plan.moment_fit_residual_max, ", figure.svg ", sizeof(svg), " bytes")

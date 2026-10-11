@@ -1,4 +1,44 @@
-/* Fonts: self-hosted latin subsets, SIL OFL 1.1 (see fonts/OFL.txt). */
+/* =============================================================================
+   schmaeke.dev — stylesheet
+
+   The page is a stack of framed blocks with sharp corners and a hard offset
+   shadow, divided inside by hairlines like the title block of an engineering
+   drawing. Colors are the Oritone palette (github.com/schmaeke/oritone).
+
+   Contents
+      1. Fonts .............. @font-face for the three self-hosted families
+      2. Design tokens ...... colors (light + dark), font stacks, spacing
+      3. Base ............... page background, body text, resets
+      4. Sheet and blocks ... the stack of framed blocks, border and shadow
+      5. Header block ....... name, intro text, Fig. 1 and its caption
+      6. Section rows ....... label column (01 Projects …), lists, group headings
+      7. Items .............. one row each: project, publication/talk, contact
+      8. Footer ............. the thin strip at the bottom
+      9. Narrow screens ..... tablet (≤ 52rem) and phone (≤ 40rem) overrides
+     10. Reduced motion
+
+   Most visual changes need only section 2: colors, fonts, paddings, the
+   label column width, the gap between blocks and the shadow offset.
+   ========================================================================== */
+
+
+/* =============================================================================
+   1. Fonts
+   -----------------------------------------------------------------------------
+   Self-hosted, so the page makes no requests to third parties. All three are
+   latin subsets under the SIL Open Font License (fonts/OFL.txt):
+
+     Roboto Condensed ... titles, labels, names    (variable, weights 300–700)
+     STIX Two Text ...... running text             (variable, 400–700, + italic)
+     Iosevka ............ monospace details        (static, 400 and 600)
+
+   Roboto Condensed and STIX Two Text are Google Fonts' "latin" subsets.
+   Iosevka comes from @fontsource/iosevka (npm) and is cut down further, to
+   ASCII, Latin-1, punctuation and arrows, with fontTools:
+     pyftsubset iosevka-latin-400-normal.woff2 --flavor=woff2 --layout-features='' \
+       --unicodes="U+0020-007E,U+00A0-00FF,U+2010-2027,U+2030-203A,U+2190-2199,U+2212"
+   A character outside a subset falls back to the next font in the stack.
+   ========================================================================== */
 
 @font-face {
   font-family: "Roboto Condensed";
@@ -40,32 +80,46 @@
   font-display: swap;
 }
 
-/* Colors: Oritone light / dark. */
+
+/* =============================================================================
+   2. Design tokens
+   -----------------------------------------------------------------------------
+   Every color, font stack and recurring size is a custom property here. Light
+   values come first; the dark block below overrides the colors only.
+
+   Fig. 1 (figure.svg) is an image and cannot read these variables. Its colors
+   live in tools/figure/figure.jl; change both together. The tab bar colors
+   (theme-color) in index.html mirror --page.
+   ========================================================================== */
 
 :root {
-  --page: #f7f3eb;
-  --paper: #fffdf8;
-  --tint: #eee8dc;
-  --rule: #d3cabe;
-  --frame: #272c30;
-  --shadow: #272c30;
-  --mesh: #525a5e;
-  --fine: #828a8e;
-  --ink: #272c30;
-  --ink-strong: #171a1c;
-  --muted: #596166;
-  --accent: #00699c;
-  --accent-fill: rgb(0 105 156 / 0.07);
+  /* Surfaces */
+  --page: #f7f3eb;        /* background behind the blocks */
+  --paper: #fffdf8;       /* inside of every block */
+  --tint: #eee8dc;        /* hover background of linked rows */
 
+  /* Lines */
+  --rule: #d3cabe;        /* hairlines inside blocks */
+  --frame: #272c30;       /* outer border of each block */
+  --shadow: #272c30;      /* solid offset shadow of each block */
+
+  /* Text */
+  --ink: #272c30;         /* body text */
+  --ink-strong: #171a1c;  /* name, headings, titles */
+  --muted: #596166;       /* meta lines, tags, numbers, captions */
+  --accent: #00699c;      /* hover, focus ring, selection */
+
+  /* Font stacks: self-hosted family first, then system fallbacks. */
   --display: "Roboto Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
   --text: "STIX Two Text", "STIX Two", "Times New Roman", serif;
   --mono: "Iosevka", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --pad-x: 1.75rem;
-  --pad-y: 1.25rem;
-  --label: 11.5rem;
-  --gap: clamp(1rem, 2.5vw, 1.75rem);
-  --offset: 6px;
+  /* Spacing and geometry (phones override some of these in section 9). */
+  --pad-x: 1.75rem;                      /* horizontal padding inside cells */
+  --pad-y: 1.25rem;                      /* vertical padding of list rows */
+  --label: 11.5rem;                      /* width of the section label column */
+  --gap: clamp(1rem, 2.5vw, 1.75rem);    /* vertical gap between blocks */
+  --offset: 6px;                         /* shadow offset, right and down */
 
   color-scheme: light dark;
 }
@@ -77,18 +131,18 @@
     --tint: #1d2327;
     --rule: #2c353b;
     --frame: #989d9c;
-    --shadow: #48545c;
-    --mesh: #989d9c;
-    --fine: #737b7d;
+    --shadow: #48545c;    /* darker than the frame: a light shadow is too loud */
     --ink: #e7e2d8;
     --ink-strong: #fbf7ef;
     --muted: #989d9c;
     --accent: #56a6cf;
-    --accent-fill: rgb(86 166 207 / 0.08);
   }
 }
 
-/* Base */
+
+/* =============================================================================
+   3. Base
+   ========================================================================== */
 
 *,
 *::before,
@@ -101,6 +155,7 @@ html {
   text-size-adjust: 100%;
 }
 
+/* Page margins: 16px at the sides on phones, up to 64px above and below. */
 body {
   margin: 0;
   padding: clamp(16px, 5vw, 64px) 16px;
@@ -119,19 +174,26 @@ body {
 
 h1,
 h2,
+h3,
 p,
 figure,
 ul {
   margin: 0;
 }
 
-/* Sheet: a stack of framed blocks, each divided into cells like a drawing's
-   title block. */
+
+/* =============================================================================
+   4. Sheet and blocks
+   -----------------------------------------------------------------------------
+   <main class="sheet"> holds the blocks (header, sections, footer) in one
+   column. Every direct child gets the paper background, the frame and the
+   hard shadow (no blur), so a new block needs no extra CSS.
+   ========================================================================== */
 
 .sheet {
   display: grid;
   gap: var(--gap);
-  max-width: 62rem;
+  max-width: 62rem;                      /* overall page width */
   margin: 0 auto;
 }
 
@@ -141,11 +203,19 @@ ul {
   box-shadow: var(--offset) var(--offset) 0 var(--shadow);
 }
 
+
+/* =============================================================================
+   5. Header block
+   -----------------------------------------------------------------------------
+   Two columns: intro (name + text) and the figure plate (20rem wide).
+   ========================================================================== */
+
 .head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 20rem;
 }
 
+/* Name at the top, intro text pushed to the bottom of the cell. */
 .intro {
   display: flex;
   flex-direction: column;
@@ -154,12 +224,14 @@ ul {
   padding: 2.5rem var(--pad-x) var(--pad-x);
 }
 
+/* Name: scales with the viewport between 2.75rem and 4.75rem. */
 h1 {
   font: 700 clamp(2.75rem, 1.5rem + 4.5vw, 4.75rem)/0.92 var(--display);
   letter-spacing: -0.015em;
   color: var(--ink-strong);
 }
 
+/* Surname on its own line. */
 h1 span {
   display: block;
 }
@@ -171,8 +243,7 @@ h1 span {
   text-wrap: pretty;
 }
 
-/* Figure */
-
+/* Fig. 1: the cell to the right of the intro, separated by a hairline. */
 .plate {
   display: flex;
   flex-direction: column;
@@ -181,50 +252,11 @@ h1 span {
   border-left: 1px solid var(--rule);
 }
 
-.plate svg {
+/* figure.svg fills the plate's width. Its colors are inside the SVG. */
+.plate img {
   display: block;
   width: 100%;
   height: auto;
-  overflow: visible;
-}
-
-.plate svg * {
-  fill: none;
-  vector-effect: non-scaling-stroke;
-}
-
-.plate .fill {
-  fill: var(--accent-fill);
-}
-
-.plate .void {
-  stroke: var(--mesh);
-  stroke-width: 1;
-  stroke-dasharray: 2 3;
-}
-
-.plate .fine {
-  stroke: var(--fine);
-  stroke-width: 1;
-}
-
-.plate .mesh {
-  stroke: var(--mesh);
-  stroke-width: 1.5;
-}
-
-.plate .points {
-  fill: var(--ink);
-}
-
-.plate .boundary {
-  stroke: var(--accent);
-  stroke-width: 1.25;
-}
-
-.plate .frame {
-  stroke: var(--ink);
-  stroke-width: 1.5;
 }
 
 figcaption {
@@ -232,19 +264,27 @@ figcaption {
   color: var(--muted);
 }
 
+/* "Fig. 1" label */
 figcaption span {
   font-weight: 600;
   color: var(--ink);
   margin-right: 0.5ch;
 }
 
-/* Rows */
+
+/* =============================================================================
+   6. Section rows
+   -----------------------------------------------------------------------------
+   Each section block is two columns: the label (number + title) on the left,
+   and the content (a list, or groups of lists) on the right.
+   ========================================================================== */
 
 .row {
   display: grid;
   grid-template-columns: var(--label) minmax(0, 1fr);
 }
 
+/* Section label, e.g. "01 / PROJECTS". */
 h2 {
   padding: var(--pad-y) var(--pad-x);
   border-right: 1px solid var(--rule);
@@ -254,10 +294,12 @@ h2 {
   color: var(--ink-strong);
 }
 
+/* Second line of a two-line label ("& Talks"). */
 h2 .line {
   display: block;
 }
 
+/* Section number above the label. */
 h2 .n {
   display: block;
   margin-bottom: 0.4rem;
@@ -271,8 +313,9 @@ h2 .n {
   list-style: none;
 }
 
+/* Small heading inside a section that splits it into groups
+   ("Publications", "Talks"). */
 .group {
-  margin: 0;
   padding: 0.625rem var(--pad-x);
   border-bottom: 1px solid var(--rule);
   font: 400 0.75rem/1.2 var(--mono);
@@ -285,11 +328,23 @@ h2 .n {
   border-top: 1px solid var(--rule);
 }
 
+/* Hairline between consecutive rows. */
 .list li + li {
   border-top: 1px solid var(--rule);
 }
 
-/* Items: whole row is the link. */
+
+/* =============================================================================
+   7. Items
+   -----------------------------------------------------------------------------
+   Every row of a list is an .item: an <a> when it links somewhere (the whole
+   row is clickable and gets hover styles and an arrow), or a <div> when it
+   doesn't. Three layouts share it, each a grid with named areas:
+
+     .project ... name | description | tag | arrow
+     .entry ..... title / meta (two lines) | arrow       publications and talks
+     .link ...... key | value | arrow                    contact
+   ========================================================================== */
 
 .item {
   display: grid;
@@ -305,11 +360,13 @@ a.item:hover {
   background: var(--tint);
 }
 
+/* Keyboard focus: a square ring drawn inside the row. */
 .item:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: -2px;
 }
 
+/* The ↗ arrow (symbol #arrow in index.html), sitting on the first baseline. */
 .arrow {
   grid-area: arrow;
   align-self: baseline;
@@ -328,6 +385,14 @@ a.item:focus-visible .arrow {
   stroke: var(--accent);
   transform: translate(2px, -2px);
 }
+
+/* Hovered rows color their main text with the accent. */
+a.item:hover :is(.name, .title, .key),
+a.item:focus-visible :is(.name, .title, .key) {
+  color: var(--accent);
+}
+
+/* --- 7a. Projects ---------------------------------------------------------- */
 
 .project {
   grid-template-columns: 9rem minmax(0, 1fr) auto 0.75rem;
@@ -353,6 +418,8 @@ a.item:focus-visible .arrow {
   color: var(--muted);
 }
 
+/* --- 7b. Publications and talks ------------------------------------------- */
+
 .entry {
   grid-template-columns: minmax(0, 1fr) 0.75rem;
   grid-template-areas:
@@ -373,6 +440,8 @@ a.item:focus-visible .arrow {
   color: var(--muted);
 }
 
+/* --- 7c. Contact ------------------------------------------------------------ */
+
 .link {
   grid-template-columns: 9rem minmax(0, 1fr) 0.75rem;
   grid-template-areas: "key value arrow";
@@ -390,12 +459,13 @@ a.item:focus-visible .arrow {
   overflow-wrap: anywhere;
 }
 
-a.item:hover :is(.name, .title, .key),
-a.item:focus-visible :is(.name, .title, .key) {
-  color: var(--accent);
-}
 
-/* Footer: a thin strip, like the bottom row of a title block. */
+/* =============================================================================
+   8. Footer
+   -----------------------------------------------------------------------------
+   Three cells; the first is as wide as the section labels so the dividers
+   line up with the blocks above.
+   ========================================================================== */
 
 .foot {
   display: grid;
@@ -416,7 +486,13 @@ a.item:focus-visible :is(.name, .title, .key) {
   text-align: right;
 }
 
-/* Narrow screens */
+
+/* =============================================================================
+   9. Narrow screens
+   ========================================================================== */
+
+/* --- 9a. Tablet: ≤ 52rem (832px) -------------------------------------------
+   Narrower figure; project descriptions move below the name. */
 
 @media (max-width: 52rem) {
   .head {
@@ -432,11 +508,16 @@ a.item:focus-visible :is(.name, .title, .key) {
   }
 }
 
+/* --- 9b. Phone: ≤ 40rem (640px) --------------------------------------------
+   Everything stacks into one column: the figure becomes a thumbnail beside
+   its caption, section labels become a strip above their content, contact
+   values move below their keys and the footer drops its last cell. */
+
 @media (max-width: 40rem) {
   :root {
     --pad-x: 1.25rem;
     --pad-y: 1rem;
-    --offset: 4px;
+    --offset: 4px;          /* stays inside the 16px page margin */
   }
 
   body {
@@ -502,6 +583,11 @@ a.item:focus-visible :is(.name, .title, .key) {
     display: none;
   }
 }
+
+
+/* =============================================================================
+   10. Reduced motion
+   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .item,
