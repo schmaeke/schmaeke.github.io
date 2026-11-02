@@ -2,11 +2,9 @@ Fonts in this directory (subsets of the originals, WOFF2):
 
   roboto-condensed-*   Roboto Condensed
   stix-two-text-*      STIX Two Text
-  iosevka-*            Iosevka
 
 Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)
 Copyright 2001-2021 The STIX Fonts Project Authors (https://github.com/stipub/stixfonts), with Reserved Font Name "TM Math". STIX Fonts™ is a trademark of The Institute of Electrical and Electronics Engineers, Inc.
-Copyright (c) 2015-2026, Renzhi Li (aka. Belleve Invis, belleve@typeof.net)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
