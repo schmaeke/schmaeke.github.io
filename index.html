@@ -20,13 +20,27 @@
     @font-face { font-family: "Roboto Condensed"; src: url("fonts/roboto-condensed-latin-var.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
     @font-face { font-family: "STIX Two Text"; src: url("fonts/stix-two-text-latin-var.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
     @font-face { font-family: "STIX Two Text"; src: url("fonts/stix-two-text-latin-italic-var.woff2") format("woff2"); font-weight: 400 700; font-style: italic; font-display: swap; }
-    :root { color-scheme: light dark; }
+    :root { color-scheme: light dark; --link: #204a87; }
+    @media (prefers-color-scheme: dark) { :root { --link: #729fcf; } }
+    a, a:visited { color: var(--link); text-decoration: none; }
     body { max-width: 48em; margin: 0 auto; padding: 1em; font-family: "STIX Two Text", serif; line-height: 1.5; }
     h1, h2 { font-family: "Roboto Condensed", sans-serif; }
     body > ul, body > ol { padding-left: 0; list-style-position: inside; }
     body > ul { list-style-type: "• "; }
     @counter-style brackets { system: extends decimal; prefix: "["; suffix: "] "; }
     body > ol { list-style-type: brackets; }
+    /* Last rule: the Tango palette in equal segments, one hue per line
+       (Butter, Orange, Chocolate, Chameleon, Sky Blue, Plum, Scarlet Red,
+       Aluminium), light to dark. */
+    hr:last-of-type { height: 4px; border: 0; background: linear-gradient(to right,
+      #fce94f 0 3.7037%, #edd400 0 7.4074%, #c4a000 0 11.1111%,
+      #fcaf3e 0 14.8148%, #f57900 0 18.5185%, #ce5c00 0 22.2222%,
+      #e9b96e 0 25.9259%, #c17d11 0 29.6296%, #8f5902 0 33.3333%,
+      #8ae234 0 37.0370%, #73d216 0 40.7407%, #4e9a06 0 44.4444%,
+      #729fcf 0 48.1481%, #3465a4 0 51.8519%, #204a87 0 55.5556%,
+      #ad7fa8 0 59.2593%, #75507b 0 62.9630%, #5c3566 0 66.6667%,
+      #ef2929 0 70.3704%, #cc0000 0 74.0741%, #a40000 0 77.7778%,
+      #eeeeec 0 81.4815%, #d3d7cf 0 85.1852%, #babdb6 0 88.8889%, #888a85 0 92.5926%, #555753 0 96.2963%, #2e3436 0 100%); }
   </style>
 </head>
 <body>
