@@ -69,7 +69,7 @@ end
 # tools/plumes.jl, as an embedded WebP; the mesh edges over it as white lines.
 const S, n = 64, 128                                            # SVG units per length unit, pixels
 const stops = [(-1.0, "#204a87"), (-0.45, "#3465a4"), (-0.18, "#729fcf"), (0.0, "#73d216"),
-               (0.15, "#edd400"), (0.3, "#f57900"), (0.45, "#cc0000"), (0.7, "#5c3566"), (1.0, "#5c3566")]
+               (0.15, "#edd400"), (0.3, "#f57900"), (0.45, "#cc0000"), (0.65, "#a40000"), (1.0, "#5c3566")]
 rgb(c) = SA[parse(Int, c[2:3]; base = 16), parse(Int, c[4:5]; base = 16), parse(Int, c[6:7]; base = 16)] / 255
 function colour(t)
     k = clamp(something(findfirst(s -> s[1] ≥ t, stops), length(stops)), 2, length(stops))

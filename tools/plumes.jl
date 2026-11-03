@@ -76,13 +76,13 @@ for step in 1:steps
 end
 
 # The picture, 1200 × 300 SVG units: the temperature at the pixel centres of a 2400 × 600 image (linear within each cell,
-# as P1), coloured by a rainbow of Tango colours, linear in between: Sky Blue (dark to light) for cold, Chameleon in the
-# middle, Butter, Orange, Scarlet Red and dark Plum for hot. The stops crowd towards the middle, where most of the fluid
-# is, so the plumes stand out. ImageMagick turns the image into a WebP, which is embedded in the SVG; the mesh edges, each
-# once, are drawn over it as white lines.
+# as P1), coloured by a rainbow of Tango colours, linear in between: Sky Blue (from dark to light) for cold, Chameleon in
+# the middle, Butter, Orange, Scarlet Red (from light to dark) and dark Plum for hot, so both ends darken. The stops crowd
+# towards the middle, where most of the fluid is, so the plumes stand out. ImageMagick turns the image into a WebP, which
+# is embedded in the SVG; the mesh edges, each once, are drawn over it as white lines.
 const S, nx, ny = 150, 2400, 600                                # SVG units per length unit, pixels
 const stops = [(-1.0, "#204a87"), (-0.45, "#3465a4"), (-0.18, "#729fcf"), (0.0, "#73d216"),
-               (0.15, "#edd400"), (0.3, "#f57900"), (0.45, "#cc0000"), (0.7, "#5c3566"), (1.0, "#5c3566")]
+               (0.15, "#edd400"), (0.3, "#f57900"), (0.45, "#cc0000"), (0.65, "#a40000"), (1.0, "#5c3566")]
 rgb(c) = SA[parse(Int, c[2:3]; base = 16), parse(Int, c[4:5]; base = 16), parse(Int, c[6:7]; base = 16)] / 255
 function colour(t)
     k = clamp(something(findfirst(s -> s[1] ≥ t, stops), length(stops)), 2, length(stops))
